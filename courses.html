@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eazy Travels University Guide</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav class="navbar">
+    <img src="logo.png" alt="Brand Logo" onclick="switchPage('home-page')">
+    <h2>University Guide</h2>
+</nav>
+
+<div class="container">
+    
+    <div id="home-page" class="page active">
+        <div class="hero">
+            <h1>Explore European Programmes</h1>
+            <p>Select your discipline to view universities, tuition fees, and living costs.</p>
+            
+            <div class="floating-buttons-container">
+                <button class="floating-btn" onclick="switchPage('it-page')">
+                    <span class="icon">💻</span>
+                    IT and Communication Related Courses (BSC)
+                </button>
+                <button class="floating-btn" onclick="switchPage('med-page')">
+                    <span class="icon">⚕️</span>
+                    Medical Related Courses
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="it-page" class="page">
+        <div class="page-header">
+            <h1>IT & Communications Programmes</h1>
+            <button class="back-btn" onclick="switchPage('home-page')">← Back to Home</button>
+        </div>
+
+        <div class="controls">
+            <div class="filter-group">
+                <label for="it-country-filter">Filter by Country</label>
+                <select id="it-country-filter"><option value="All">All Countries</option></select>
+            </div>
+            <div class="filter-group">
+                <label for="it-field-filter">Filter by Field of Study</label>
+                <select id="it-field-filter"><option value="All">All Fields</option></select>
+            </div>
+        </div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>University</th>
+                        <th>Location (City, Country)</th>
+                        <th>Programme & Field</th>
+                        <th>Tuition Fee (/yr)</th>
+                        <th>Avg Cost of Living (/mo)</th>
+                        <th>University Dorm (/mo)</th>
+                        <th>Studio Apt (/mo)</th>
+                    </tr>
+                </thead>
+                <tbody id="it-table-body"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="med-page" class="page">
+        <div class="page-header">
+            <h1>Medical & Biology Programmes</h1>
+            <button class="back-btn" onclick="switchPage('home-page')">← Back to Home</button>
+        </div>
+
+        <div class="controls">
+            <div class="filter-group">
+                <label for="med-country-filter">Filter by Country</label>
+                <select id="med-country-filter"><option value="All">All Countries</option></select>
+            </div>
+            <div class="filter-group">
+                <label for="med-field-filter">Filter by Field of Study</label>
+                <select id="med-field-filter"><option value="All">All Fields</option></select>
+            </div>
+        </div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>University</th>
+                        <th>Location (City, Country)</th>
+                        <th>Programme & Field</th>
+                        <th>Tuition Fee (/yr)</th>
+                        <th>Avg Cost of Living (/mo)</th>
+                        <th>University Dorm (/mo)</th>
+                        <th>Studio Apt (/mo)</th>
+                    </tr>
+                </thead>
+                <tbody id="med-table-body"></tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    // --- DATASETS ---
+
+    const itData = [
+        { "University": "POLITEHNICA Bucharest (UPB)", "Country": "Romania 🇷🇴", "City": "Bucharest", "Field": "IT / Computer Engineering", "Programme": "Information Engineering", "Tuition": "€2,430", "AvgCostLiving": "€400 – €550", "DormFee": "€100 – €200", "StudioFee": "€350 – €500" },
+        { "University": "POLITEHNICA Bucharest (UPB)", "Country": "Romania 🇷🇴", "City": "Bucharest", "Field": "IT / Computer Engineering", "Programme": "Internet of Things Engineering", "Tuition": "€2,430", "AvgCostLiving": "€400 – €550", "DormFee": "€100 – €200", "StudioFee": "€350 – €500" },
+        { "University": "POLITEHNICA Bucharest (UPB)", "Country": "Romania 🇷🇴", "City": "Bucharest", "Field": "Foreign Languages in Communication", "Programme": "Translation Study – English/French", "Tuition": "€1,980", "AvgCostLiving": "€400 – €550", "DormFee": "€100 – €200", "StudioFee": "€350 – €500" },
+        { "University": "West University of Timișoara (UVT)", "Country": "Romania 🇷🇴", "City": "Timișoara", "Field": "IT / Computer Engineering", "Programme": "Computer Science (in English)", "Tuition": "€2,430", "AvgCostLiving": "€350 – €500", "DormFee": "€80 – €150", "StudioFee": "€250 – €400" },
+        { "University": "West University of Timișoara (UVT)", "Country": "Romania 🇷🇴", "City": "Timișoara", "Field": "Artificial Intelligence", "Programme": "Artificial Intelligence", "Tuition": "€2,430", "AvgCostLiving": "€350 – €500", "DormFee": "€80 – €150", "StudioFee": "€250 – €400" },
+        { "University": "Babeș-Bolyai University (UBB)", "Country": "Romania 🇷🇴", "City": "Cluj-Napoca", "Field": "Foreign Languages in Communication", "Programme": "Media Communication", "Tuition": "~€2,500", "AvgCostLiving": "€400 – €600", "DormFee": "€100 – €180", "StudioFee": "€350 – €550" },
+        { "University": "Babeș-Bolyai University (UBB)", "Country": "Romania 🇷🇴", "City": "Cluj-Napoca", "Field": "Foreign Languages in Communication", "Programme": "Public Relations & Advertising", "Tuition": "~€2,500", "AvgCostLiving": "€400 – €600", "DormFee": "€100 – €180", "StudioFee": "€350 – €550" },
+        { "University": "Babeș-Bolyai University (UBB)", "Country": "Romania 🇷🇴", "City": "Cluj-Napoca", "Field": "Foreign Languages in Communication", "Programme": "Digital Media & Games Studies", "Tuition": "~€2,500", "AvgCostLiving": "€400 – €600", "DormFee": "€100 – €180", "StudioFee": "€350 – €550" },
+        { "University": "Politehnica University Timișoara (UPT)", "Country": "Romania 🇷🇴", "City": "Timișoara", "Field": "Software Engineering", "Programme": "Computer and Software Engineering", "Tuition": "~€2,500", "AvgCostLiving": "€350 – €500", "DormFee": "€80 – €150", "StudioFee": "€250 – €400" },
+        { "University": "Politehnica University Timișoara (UPT)", "Country": "Romania 🇷🇴", "City": "Timișoara", "Field": "Foreign Languages in Communication", "Programme": "Communication Sciences", "Tuition": "€1,980", "AvgCostLiving": "€350 – €500", "DormFee": "€80 – €150", "StudioFee": "€250 – €400" },
+        { "University": "Warsaw Univ. of Technology (WUT)", "Country": "Poland 🇵🇱", "City": "Warsaw", "Field": "IT / Computer Engineering", "Programme": "Computer Science and Information Systems (BSc)", "Tuition": "€11,400", "AvgCostLiving": "€600 – €900", "DormFee": "€150 – €300", "StudioFee": "€600 – €900" },
+        { "University": "Warsaw Univ. of Technology (WUT)", "Country": "Poland 🇵🇱", "City": "Warsaw", "Field": "IT / Computer Engineering", "Programme": "Computer Systems – Specialisation: Computer Systems and Networks (BSc)", "Tuition": "~€11,400", "AvgCostLiving": "€600 – €900", "DormFee": "€150 – €300", "StudioFee": "€600 – €900" },
+        { "University": "Fontys Univ. of Applied Sciences", "Country": "Netherlands 🇳🇱", "City": "Eindhoven", "Field": "IT / ICT", "Programme": "Information & Communication Technology (ICT)", "Tuition": "€13,080", "AvgCostLiving": "€700 – €1,000", "DormFee": "€400 – €600", "StudioFee": "€900 – €1,200" },
+        { "University": "Fontys Univ. of Applied Sciences", "Country": "Netherlands 🇳🇱", "City": "Eindhoven", "Field": "IT", "Programme": "Information Technology", "Tuition": "Verify on site", "AvgCostLiving": "€700 – €1,000", "DormFee": "€400 – €600", "StudioFee": "€900 – €1,200" },
+        { "University": "The Hague Univ. of Applied Sciences (THUAS)", "Country": "Netherlands 🇳🇱", "City": "The Hague", "Field": "Foreign Languages in Communication", "Programme": "International Communication Management", "Tuition": "~€9,889", "AvgCostLiving": "€800 – €1,100", "DormFee": "€500 – €750", "StudioFee": "€1,000 – €1,400" }
+    ];
+
+    const medData = [
+        { "University": "University of Bucharest\n(Faculty of Biology)", "Country": "Romania", "City": "Bucharest", "Field": "Post-Bachelor's MSc", "Programme": "MSc Applied Biochemistry & Molecular Biology (ABMB)", "Tuition": "€3,050", "AvgCostLiving": "€400 – €700", "DormFee": "€50 – €100", "StudioFee": "€350 – €450" },
+        { "University": "Carol Davila University of Medicine & Pharmacy", "Country": "Romania", "City": "Bucharest", "Field": "Integrated Master's", "Programme": "General Medicine (MD) — 6-yr Integrated", "Tuition": "€10,000", "AvgCostLiving": "€400 – €700", "DormFee": "€50 – €100", "StudioFee": "€350 – €450" },
+        { "University": "Carol Davila University of Medicine & Pharmacy", "Country": "Romania", "City": "Bucharest", "Field": "Integrated Master's", "Programme": "Dentistry (DDS) — 6-yr Integrated", "Tuition": "€10,000", "AvgCostLiving": "€400 – €700", "DormFee": "€50 – €100", "StudioFee": "€350 – €450" },
+        { "University": "Carol Davila University of Medicine & Pharmacy", "Country": "Romania", "City": "Bucharest", "Field": "Integrated Master's", "Programme": "Pharmacy — 5-yr Integrated\n⚠️ Taught in FRENCH (not English)", "Tuition": "€8,500", "AvgCostLiving": "€400 – €700", "DormFee": "€50 – €100", "StudioFee": "€350 – €450" },
+        { "University": "Grigore T. Popa University of Medicine & Pharmacy", "Country": "Romania", "City": "Iași", "Field": "Integrated Master's", "Programme": "General Medicine (MD) — 6-yr Integrated", "Tuition": "€7,500", "AvgCostLiving": "€350 – €550", "DormFee": "€50 – €100", "StudioFee": "€300 – €400" },
+        { "University": "Grigore T. Popa University of Medicine & Pharmacy", "Country": "Romania", "City": "Iași", "Field": "Integrated Master's", "Programme": "Pharmacy — 5-yr Integrated (English)", "Tuition": "€11,000", "AvgCostLiving": "€350 – €550", "DormFee": "€50 – €100", "StudioFee": "€300 – €400" },
+        { "University": "Iuliu Hațieganu University of Medicine & Pharmacy", "Country": "Romania", "City": "Cluj-Napoca", "Field": "Integrated Master's", "Programme": "General Medicine (MD) — 6-yr Integrated", "Tuition": "~€8,000", "AvgCostLiving": "€400 – €650", "DormFee": "€60 – €100", "StudioFee": "€350 – €480" },
+        { "University": "Iuliu Hațieganu University of Medicine & Pharmacy", "Country": "Romania", "City": "Cluj-Napoca", "Field": "Integrated Master's", "Programme": "Dentistry — 6-yr Integrated (English)", "Tuition": "~€8,000", "AvgCostLiving": "€400 – €650", "DormFee": "€60 – €100", "StudioFee": "€350 – €480" },
+        { "University": "Iuliu Hațieganu University of Medicine & Pharmacy", "Country": "Romania", "City": "Cluj-Napoca", "Field": "Integrated Master's", "Programme": "Pharmacy — 5-yr Integrated (English)", "Tuition": "~€8,000", "AvgCostLiving": "€400 – €650", "DormFee": "€60 – €100", "StudioFee": "€350 – €480" },
+        { "University": "Masaryk University\n(Faculty of Pharmacy)", "Country": "Czech Republic\n(Schengen)", "City": "Brno", "Field": "Integrated Master's", "Programme": "MPharm Pharmacy — 5-yr Integrated (English)", "Tuition": "€7,500", "AvgCostLiving": "€500 – €750", "DormFee": "€200 – €320", "StudioFee": "€420 – €550" },
+        { "University": "Masaryk University\n(Faculty of Medicine)", "Country": "Czech Republic\n(Schengen)", "City": "Brno", "Field": "Integrated Master's", "Programme": "General Medicine (MD) — 6-yr Integrated (English)", "Tuition": "~€12,000", "AvgCostLiving": "€500 – €750", "DormFee": "€200 – €320", "StudioFee": "€420 – €550" },
+        { "University": "Comenius University\n— Jessenius Faculty of Medicine", "Country": "Slovakia\n(Schengen)", "City": "Martin", "Field": "Integrated Master's", "Programme": "General Medicine (MD) — 6-yr Integrated (English)", "Tuition": "~€12,000–14,000", "AvgCostLiving": "€400 – €600", "DormFee": "€150 – €250", "StudioFee": "€320 – €450" },
+        { "University": "Semmelweis University", "Country": "Hungary\n(Schengen)", "City": "Budapest", "Field": "Integrated Master's", "Programme": "General Medicine (MD) — 6-yr Integrated (English)", "Tuition": "~USD 19,900\n(≈ €18,500/yr)", "AvgCostLiving": "€700 – €1,000", "DormFee": "€200 – €350", "StudioFee": "€450 – €650" },
+        { "University": "Semmelweis University", "Country": "Hungary\n(Schengen)", "City": "Budapest", "Field": "Integrated Master's", "Programme": "Pharmacy — 5-yr Integrated (English)", "Tuition": "~USD 19,900\n(≈ €18,500/yr)", "AvgCostLiving": "€700 – €1,000", "DormFee": "€200 – €350", "StudioFee": "€450 – €650" },
+        { "University": "Medical University of Gdańsk", "Country": "Poland\n(Schengen)", "City": "Gdańsk", "Field": "Integrated Master's", "Programme": "General Medicine (MD) — 6-yr English Division", "Tuition": "€12,500", "AvgCostLiving": "€500 – €700", "DormFee": "€150 – €250", "StudioFee": "€400 – €550" },
+        { "University": "Medical University of Gdańsk", "Country": "Poland\n(Schengen)", "City": "Gdańsk", "Field": "Integrated Master's", "Programme": "Dental Medicine — 5-yr English Division", "Tuition": "€14,000", "AvgCostLiving": "€500 – €700", "DormFee": "€150 – €250", "StudioFee": "€400 – €550" },
+        { "University": "LMU Munich\n(Ludwig Maximilian University)", "Country": "Germany\n(Schengen)", "City": "Munich", "Field": "Post-Bachelor's MSc", "Programme": "MSc Molecular & Cellular Biology — 2-yr", "Tuition": "~€0 tuition\n(Semester contrib: ~€373)", "AvgCostLiving": "€1,300 – €2,000", "DormFee": "€280 – €400", "StudioFee": "€1,000 – €1,500" },
+        { "University": "LMU Munich\n(Ludwig Maximilian University)", "Country": "Germany\n(Schengen)", "City": "Munich", "Field": "Post-Bachelor's MSc", "Programme": "MSc Neurosciences — 2-yr", "Tuition": "~€0 tuition\n(Semester contrib: ~€373)", "AvgCostLiving": "€1,300 – €2,000", "DormFee": "€280 – €400", "StudioFee": "€1,000 – €1,500" },
+        { "University": "Sorbonne University & Paris public universities", "Country": "France\n(Schengen)", "City": "Paris", "Field": "Post-Bachelor's MSc", "Programme": "MSc Biology / Life Sciences — 2-yr\n(French-taught — no English MSc)", "Tuition": "€3,770", "AvgCostLiving": "€1,200 – €2,000", "DormFee": "€400 – €600", "StudioFee": "€900 – €1,400" }
+    ];
+
+    // --- LOGIC ---
+
+    // Utility to replace newlines with HTML line breaks for accurate display
+    const formatText = (text) => text ? text.replace(/\n/g, '<br>') : 'N/A';
+
+    // Page routing
+    function switchPage(pageId) {
+        document.querySelectorAll('.page').forEach(page => {
+            page.classList.remove('active');
+        });
+        document.getElementById(pageId).classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Initialize Dropdowns
+    function initializeFilters(data, countryFilterId, fieldFilterId) {
+        const countryFilter = document.getElementById(countryFilterId);
+        const fieldFilter = document.getElementById(fieldFilterId);
+
+        const uniqueCountries = [...new Set(data.map(item => item.Country))].sort();
+        const uniqueFields = [...new Set(data.map(item => item.Field))].sort();
+
+        uniqueCountries.forEach(country => {
+            const option = document.createElement('option');
+            option.value = country;
+            // Clean up display name for the dropdown
+            option.textContent = country.replace(/\n/g, ' '); 
+            countryFilter.appendChild(option);
+        });
+
+        uniqueFields.forEach(field => {
+            const option = document.createElement('option');
+            option.value = field;
+            option.textContent = field.replace(/\n/g, ' ');
+            fieldFilter.appendChild(option);
+        });
+    }
+
+    // Render Table logic retaining specific text formatting requested
+    function renderTable(data, tableBodyId) {
+        const tableBody = document.getElementById(tableBodyId);
+        tableBody.innerHTML = ''; 
+
+        if (data.length === 0) {
+            tableBody.innerHTML = `<tr><td colspan="7" class="empty-state">No programmes match your current filters.</td></tr>`;
+            return;
+        }
+
+        data.forEach(item => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td><strong>${formatText(item.University)}</strong></td>
+                <td>${formatText(item.City)},<br><small>${formatText(item.Country)}</small></td>
+                <td>${formatText(item.Programme)}<br><small><i>${formatText(item.Field)}</i></small></td>
+                <td>${formatText(item.Tuition)}</td>
+                <td>${formatText(item.AvgCostLiving)}</td>
+                <td>${formatText(item.DormFee)}</td>
+                <td>${formatText(item.StudioFee)}</td>
+            `;
+            tableBody.appendChild(row);
+        });
+    }
+
+    // Filter event handlers builder
+    function setupFiltering(data, countryId, fieldId, tableBodyId) {
+        const countrySelect = document.getElementById(countryId);
+        const fieldSelect = document.getElementById(fieldId);
+
+        const applyFilters = () => {
+            const cVal = countrySelect.value;
+            const fVal = fieldSelect.value;
+
+            const filtered = data.filter(item => {
+                const matchC = cVal === 'All' || item.Country === cVal;
+                const matchF = fVal === 'All' || item.Field === fVal;
+                return matchC && matchF;
+            });
+            renderTable(filtered, tableBodyId);
+        };
+
+        countrySelect.addEventListener('change', applyFilters);
+        fieldSelect.addEventListener('change', applyFilters);
+    }
+
+    // Boot Application
+    window.onload = () => {
+        // Init IT Dash
+        initializeFilters(itData, 'it-country-filter', 'it-field-filter');
+        setupFiltering(itData, 'it-country-filter', 'it-field-filter', 'it-table-body');
+        renderTable(itData, 'it-table-body');
+
+        // Init Medical Dash
+        initializeFilters(medData, 'med-country-filter', 'med-field-filter');
+        setupFiltering(medData, 'med-country-filter', 'med-field-filter', 'med-table-body');
+        renderTable(medData, 'med-table-body');
+    };
+</script>
+
+</body>
+</html>
