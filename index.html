@@ -445,6 +445,9 @@
         });
         document.getElementById(pageId).classList.add('active');
         window.scrollTo({ top: 0, behavior: 'smooth' });
+
+        // The new page now has a layout, so its table width can finally be measured
+        if (typeof refreshFloatingScrollbars === 'function') refreshFloatingScrollbars();
     }
 
     // Initialize Dropdowns
@@ -613,6 +616,67 @@
 
     const slug = (text) => text.toLowerCase().replace(/[^a-z]+/g, '-').replace(/^-|-$/g, '');
 
+    // --- FLOATING HORIZONTAL SCROLLBAR ---
+
+    // A wide table's own scrollbar sits at the very bottom of the table, so if you
+    // are reading the middle of a long list you have to scroll all the way down to
+    // slide sideways. This pins a second scrollbar to the bottom of the screen that
+    // stays with you, and keeps the two in sync. It hides itself when the table
+    // already fits, which is what happens on phones where rows become cards.
+    const scrollbarSyncs = [];
+
+    // A hidden page has no layout, so a table's width reads as zero until its page
+    // is shown. switchPage() calls this once the new page is visible.
+    function refreshFloatingScrollbars() {
+        scrollbarSyncs.forEach(sync => sync());
+    }
+
+    function setupFloatingScrollbars() {
+        document.querySelectorAll('.table-container').forEach(container => {
+            const wrap = document.createElement('div');
+            wrap.className = 'table-scroll-wrap';
+            container.parentNode.insertBefore(wrap, container);
+            wrap.appendChild(container);
+
+            const bar = document.createElement('div');
+            bar.className = 'floating-scrollbar';
+            const spacer = document.createElement('div');
+            bar.appendChild(spacer);
+            wrap.appendChild(bar);
+
+            const sync = () => {
+                // On phones the Canada table turns into stacked cards and stops
+                // scrolling sideways at all, so the bar must hide rather than sit
+                // there doing nothing.
+                const overflowX = getComputedStyle(container).overflowX;
+                const scrollable = overflowX === 'auto' || overflowX === 'scroll';
+                const overflows = scrollable && container.scrollWidth > container.clientWidth + 1;
+
+                bar.style.display = overflows ? 'block' : 'none';
+                spacer.style.width = container.scrollWidth + 'px';
+                bar.scrollLeft = container.scrollLeft;
+            };
+
+            // Guard against the two scroll handlers calling each other forever.
+            let syncing = false;
+            const mirror = (from, to) => {
+                if (syncing) return;
+                syncing = true;
+                to.scrollLeft = from.scrollLeft;
+                syncing = false;
+            };
+
+            bar.addEventListener('scroll', () => mirror(bar, container));
+            container.addEventListener('scroll', () => mirror(container, bar));
+            window.addEventListener('resize', sync);
+
+            // Filtering and expanding rows change the table's size, so watch it.
+            new ResizeObserver(sync).observe(container.querySelector('table'));
+            scrollbarSyncs.push(sync);
+            sync();
+        });
+    }
+
     function initializeCanadaFilters() {
         const categoryFilter = document.getElementById('ca-category-filter');
         const credentialFilter = document.getElementById('ca-credential-filter');
@@ -677,6 +741,9 @@
         initializeCanadaFilters();
         setupCanadaFiltering();
         renderCanadaTable(canadaHealthData);
+
+        // Tables are built by now, so their real widths are known
+        setupFloatingScrollbars();
     };
 </script>
 

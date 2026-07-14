@@ -476,6 +476,68 @@ input[type="text"]:focus {
     background: var(--secondary-color);
 }
 
+/* =========================================
+   FLOATING HORIZONTAL SCROLLBAR
+   A second scrollbar that sticks to the bottom of the screen while a wide
+   table is in view, so the table can be slid sideways from anywhere on the
+   page instead of only from its bottom edge. Built by setupFloatingScrollbars().
+   ========================================= */
+
+.table-scroll-wrap {
+    position: relative;
+}
+
+/* The table's own scrollbar is hidden so there are never two competing bars.
+   Scrolling by trackpad, wheel or touch still works exactly as before. */
+.table-container {
+    scrollbar-width: none;
+}
+
+.table-container::-webkit-scrollbar {
+    height: 0;
+}
+
+.floating-scrollbar {
+    position: sticky;
+    bottom: 12px;
+    z-index: 60;
+    height: 16px;
+    margin-top: 10px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(8px);
+    box-shadow: 0 4px 14px rgba(15, 6, 0, 0.15);
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary-color) transparent;
+}
+
+/* Invisible spacer, sized to the table, that gives the bar something to scroll */
+.floating-scrollbar > div {
+    height: 1px;
+}
+
+.floating-scrollbar::-webkit-scrollbar {
+    height: 16px;
+}
+
+.floating-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.floating-scrollbar::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 10px;
+    border: 4px solid transparent;
+    background-clip: padding-box;
+}
+
+.floating-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: var(--secondary-color);
+    background-clip: padding-box;
+}
+
 .notes-panel {
     margin-top: 30px;
     background: var(--surface-color);
