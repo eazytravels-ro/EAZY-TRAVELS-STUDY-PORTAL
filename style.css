@@ -98,6 +98,16 @@ body {
     margin-bottom: 50px;
 }
 
+/* "Choose Destination" / "Select a Study Area" prompt */
+.hero-sub {
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 600;
+    color: var(--primary-color) !important;
+    font-size: 1rem !important;
+    margin-bottom: 40px !important;
+}
+
 .floating-buttons-container {
     display: flex;
     justify-content: center;
@@ -129,12 +139,55 @@ body {
     font-size: 4rem;
 }
 
+.floating-btn small {
+    font-size: 0.85rem;
+    font-weight: normal;
+    line-height: 1.4;
+    opacity: 0.75;
+}
+
 .floating-btn:hover {
     transform: translateY(-10px);
     box-shadow: 0 20px 40px rgba(135, 60, 1, 0.2);
     background: var(--primary-color);
     color: #fff;
     border-color: var(--primary-color);
+}
+
+/* Pathway boxes idle-float until hovered, then lift into the hover state above */
+.pathway-btn {
+    animation: float 4s ease-in-out infinite;
+}
+
+.pathway-btn:nth-child(2) {
+    animation-delay: 2s;
+}
+
+.pathway-btn:hover {
+    animation-play-state: paused;
+}
+
+.pathway-btn .icon {
+    animation: pulse 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-12px); }
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50%      { transform: scale(1.12); }
+}
+
+/* Respect users who ask their system to reduce motion */
+@media (prefers-reduced-motion: reduce) {
+    .pathway-btn,
+    .pathway-btn .icon,
+    .page {
+        animation: none;
+    }
 }
 
 /* Inner Pages Styling */
@@ -259,6 +312,200 @@ tr:hover {
 }
 
 /* =========================================
+   CANADA / HEALTH TABLE
+   ========================================= */
+
+.page-intro {
+    color: #555;
+    margin: -10px 0 25px;
+}
+
+input[type="text"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #fff;
+    transition: border-color 0.2s;
+}
+
+input[type="text"]:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+.result-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.link-btn {
+    background: none;
+    border: none;
+    color: var(--primary-color);
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: underline;
+    font-size: 0.9rem;
+}
+
+/* University name doubles as the link to the official programme page */
+.uni-link {
+    color: var(--primary-color);
+    font-weight: bold;
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.2s;
+}
+
+.uni-link:hover,
+.uni-link:focus {
+    border-bottom-color: var(--primary-color);
+}
+
+.link-hint {
+    display: block;
+    margin-top: 4px;
+    font-size: 0.75rem;
+    color: #999;
+}
+
+.tag {
+    display: inline-block;
+    margin-top: 8px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.tag-regulatory-affairs        { background: #e3f0fb; color: #14507f; }
+.tag-pharmacovigilance-drug-safety { background: #e4f5e8; color: #1d6b32; }
+.tag-pharmaceutical-sciences   { background: #fdf3d8; color: #7a5a10; }
+
+.badge {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    line-height: 1.35;
+}
+
+.badge-ok   { background: #e4f5e8; color: #1d6b32; }
+.badge-warn { background: #fdeee0; color: #8a4b12; }
+
+.details-btn {
+    background: transparent;
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: 0.2s;
+}
+
+.details-btn:hover {
+    background: var(--primary-color);
+    color: #fff;
+}
+
+/* Detail rows stay collapsed until the user opens them */
+.detail-row {
+    display: none;
+}
+
+.detail-row.open {
+    display: table-row;
+}
+
+.summary-row {
+    cursor: pointer;
+}
+
+.detail-row td {
+    background: var(--hover-color);
+    padding: 25px;
+}
+
+.detail-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+.detail-grid h4 {
+    margin: 0 0 8px;
+    color: var(--secondary-color);
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.detail-grid p {
+    margin: 0 0 18px;
+    font-size: 0.92rem;
+}
+
+.verify-note {
+    font-size: 0.85rem !important;
+    color: #666;
+    font-style: italic;
+}
+
+.visit-btn {
+    display: inline-block;
+    background: var(--primary-color);
+    color: #fff;
+    padding: 10px 18px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: 0.2s;
+}
+
+.visit-btn:hover {
+    background: var(--secondary-color);
+}
+
+.notes-panel {
+    margin-top: 30px;
+    background: var(--surface-color);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--border-color);
+    border-left: 5px solid var(--primary-color);
+    border-radius: 12px;
+    padding: 25px 30px;
+    box-shadow: 0 8px 25px rgba(15, 6, 0, 0.05);
+}
+
+.notes-panel h3 {
+    margin-top: 0;
+    color: var(--secondary-color);
+}
+
+.notes-panel ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.notes-panel li {
+    margin-bottom: 12px;
+}
+
+.notes-panel a {
+    color: var(--primary-color);
+}
+
+/* =========================================
    RESPONSIVE DESIGN (MOBILES & TABLETS)
    ========================================= */
 @media (max-width: 768px) {
@@ -317,5 +564,140 @@ tr:hover {
     th, td {
         padding: 10px 12px;
         font-size: 0.9rem;
+    }
+
+    /* Stack the requirements/English columns on narrow screens */
+    .detail-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .detail-row td {
+        padding: 18px;
+    }
+
+    .result-bar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    /* -----------------------------------------------------------------
+       The Canada table has 8 columns, which is far too wide for a phone.
+       Below 768px each row becomes a self-contained card and every cell
+       prints its own heading from the data-label attribute, so nobody has
+       to scroll sideways to read a fee or a deadline.
+       ----------------------------------------------------------------- */
+    #canada-health-page .table-container {
+        overflow-x: visible;
+        background: transparent;
+        border: none;
+        box-shadow: none;
+        backdrop-filter: none;
+    }
+
+    #canada-health-page table,
+    #canada-health-page tbody,
+    #canada-health-page tr,
+    #canada-health-page td {
+        display: block;
+        width: 100%;
+    }
+
+    #canada-health-page thead {
+        display: none;
+    }
+
+    #canada-health-page .summary-row {
+        background: var(--surface-color);
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        box-shadow: 0 6px 18px rgba(15, 6, 0, 0.06);
+        margin-bottom: 18px;
+        overflow: hidden;
+    }
+
+    #canada-health-page .summary-row:hover {
+        background: var(--surface-color);
+    }
+
+    #canada-health-page .summary-row td {
+        border-bottom: 1px solid var(--border-color);
+        padding: 12px 16px;
+    }
+
+    #canada-health-page .summary-row td::before {
+        content: attr(data-label);
+        display: block;
+        margin-bottom: 4px;
+        font-size: 0.68rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.6px;
+        color: #8a8a8a;
+    }
+
+    /* The details button is its own full-width footer on the card */
+    #canada-health-page .summary-row .details-cell {
+        border-bottom: none;
+        padding: 14px 16px;
+        background: var(--hover-color);
+    }
+
+    #canada-health-page .summary-row .details-cell::before {
+        content: none;
+    }
+
+    #canada-health-page .details-btn {
+        width: 100%;
+    }
+
+    /* The expanded panel sits directly beneath its card */
+    #canada-health-page .detail-row.open {
+        display: block;
+        margin: -18px 0 18px;
+    }
+
+    #canada-health-page .detail-row td {
+        border-radius: 0 0 12px 12px;
+        border: 1px solid var(--border-color);
+        border-top: none;
+    }
+
+    #canada-health-page .empty-state {
+        background: var(--surface-color);
+        border-radius: 12px;
+    }
+
+    .notes-panel {
+        padding: 20px;
+    }
+}
+
+/* Very small phones: keep the hero and headings from overflowing */
+@media (max-width: 420px) {
+    .hero h1 {
+        font-size: 1.6rem;
+    }
+
+    .page-header h1 {
+        font-size: 1.35rem;
+    }
+
+    .floating-btn {
+        padding: 20px;
+        font-size: 1.05rem;
+    }
+
+    .floating-btn .icon {
+        font-size: 3rem;
+    }
+
+    .container {
+        padding: 0 12px;
+    }
+
+    .navbar {
+        padding: 10px 12px;
     }
 }

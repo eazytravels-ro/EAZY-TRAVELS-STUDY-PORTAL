@@ -14,18 +14,61 @@
 </nav>
 
 <div class="container">
-    
+
     <div id="home-page" class="page active">
         <div class="hero">
-            <h1>Explore Programmes in the European Union</h1>
-            <p>Select your discipline to view universities, tuition fees, and living costs.</p>
-            
+            <h1>Explore Programmes</h1>
+            <p class="hero-sub">Choose Destination</p>
+
             <div class="floating-buttons-container">
-                <button class="floating-btn" onclick="switchPage('it-page')">
+                <button class="floating-btn pathway-btn" onclick="switchPage('canada-page')">
+                    <span class="icon">🍁</span>
+                    Canada Pathway
+                    <small>Graduate programmes &amp; postgraduate certificates</small>
+                </button>
+                <button class="floating-btn pathway-btn" onclick="switchPage('eu-page')">
+                    <span class="icon">🌍</span>
+                    EU Pathway
+                    <small>Bachelor's, Master's &amp; Integrated degrees</small>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="canada-page" class="page">
+        <div class="page-header">
+            <h1>🍁 Canada Pathway</h1>
+            <button class="back-btn" onclick="switchPage('home-page')">← Back to Home</button>
+        </div>
+
+        <div class="hero">
+            <p class="hero-sub">Select a Study Area</p>
+
+            <div class="floating-buttons-container">
+                <button class="floating-btn pathway-btn" onclick="switchPage('canada-health-page')">
+                    <span class="icon">⚕️</span>
+                    Health-Related Courses
+                    <small>Regulatory Affairs · Pharmacovigilance · Pharmaceutical Sciences</small>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="eu-page" class="page">
+        <div class="page-header">
+            <h1>🌍 EU Pathway</h1>
+            <button class="back-btn" onclick="switchPage('home-page')">← Back to Home</button>
+        </div>
+
+        <div class="hero">
+            <p class="hero-sub">Select a Study Area</p>
+
+            <div class="floating-buttons-container">
+                <button class="floating-btn pathway-btn" onclick="switchPage('it-page')">
                     <span class="icon">💻</span>
                     IT and Communication Related Courses (BSC)
                 </button>
-                <button class="floating-btn" onclick="switchPage('med-page')">
+                <button class="floating-btn pathway-btn" onclick="switchPage('med-page')">
                     <span class="icon">⚕️</span>
                     Medical Related Courses
                 </button>
@@ -33,10 +76,74 @@
         </div>
     </div>
 
+    <div id="canada-health-page" class="page">
+        <div class="page-header">
+            <h1>Canada: Health-Related Master's &amp; Graduate Programmes</h1>
+            <button class="back-btn" onclick="switchPage('canada-page')">← Back to Canada Pathway</button>
+        </div>
+
+        <p class="page-intro">
+            Regulatory Affairs, Pharmacovigilance and Pharmaceutical Sciences programmes for the
+            <strong>2026/2027</strong> intake. Every tuition figure shown is the
+            <strong>international student rate</strong>. Tap any <strong>university name</strong> to open its
+            official page, or tap a row to see the admission and English requirements.
+        </p>
+
+        <div class="controls">
+            <div class="filter-group">
+                <label for="ca-search">Search</label>
+                <input type="text" id="ca-search" placeholder="Search university or programme…">
+            </div>
+            <div class="filter-group">
+                <label for="ca-category-filter">Filter by Field</label>
+                <select id="ca-category-filter"><option value="All">All Fields</option></select>
+            </div>
+            <div class="filter-group">
+                <label for="ca-credential-filter">Filter by Credential</label>
+                <select id="ca-credential-filter"><option value="All">All Credentials</option></select>
+            </div>
+        </div>
+
+        <div class="result-bar">
+            <span id="ca-count"></span>
+            <button class="link-btn" onclick="resetCanadaFilters()">Reset filters</button>
+        </div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>University</th>
+                        <th>Programme &amp; Field</th>
+                        <th>Credential</th>
+                        <th>Duration</th>
+                        <th>Intakes (2026/27)</th>
+                        <th>International Tuition (CAD)</th>
+                        <th>Application Deadline (International)</th>
+                        <th>Details</th>
+                    </tr>
+                </thead>
+                <tbody id="ca-table-body"></tbody>
+            </table>
+        </div>
+
+        <div class="notes-panel">
+            <h3>⚠️ Read Before You Apply</h3>
+            <ul>
+                <li><strong>Credential level matters.</strong> Seneca awards an <em>Ontario College Graduate Certificate</em>, which is a postgraduate diploma and <strong>not a master's degree</strong>. Northeastern in Toronto is the only Canadian institution offering a true master's (MS) in Regulatory Affairs, and Western is the only one offering a dedicated MSc in Drug Safety and Pharmacovigilance.</li>
+                <li><strong>Check whether the fee is per term or per year.</strong> Western charges CAD 14,694.42 <em>per term</em> across 3 terms, and Saskatchewan charges CAD 4,279 per term across 3 terms. Reading either as an annual figure will badly understate the real cost.</li>
+                <li><strong>Secure a supervisor first.</strong> Toronto, Saskatchewan, Manitoba and Alberta all require you to line up a faculty supervisor <em>before</em> your application is reviewed. Start contacting faculty 6 to 12 months ahead. UBC encourages contact but does not require a commitment up front.</li>
+                <li><strong>PGWP eligibility.</strong> Your ability to work in Canada after graduating depends on the programme's field of study. Confirm eligibility at <a href="https://www.canada.ca/en/immigration-refugees-citizenship/services/study-canada/work/after-graduation/eligibility.html" target="_blank" rel="noopener">IRCC</a> before you commit to any school.</li>
+                <li><strong>For Nigerian applicants.</strong> A WES credential evaluation takes 4 to 8 weeks, so start it now. Study permits from Nigeria take roughly 8 to 12 weeks, so apply immediately after your Letter of Acceptance.</li>
+                <li><strong>Tuition changes every year.</strong> All fees here are the international student rate and were checked against official pages and fee schedules in July 2026. Where a row says the figure is subject to change, treat it as a guide and confirm the current amount with the university before you budget or apply.</li>
+            </ul>
+        </div>
+    </div>
+
     <div id="it-page" class="page">
         <div class="page-header">
-            <h1>IT & Communications Programmes</h1>
-            <button class="back-btn" onclick="switchPage('home-page')">← Back to Home</button>
+            <h1>IT &amp; Communications Programmes</h1>
+            <button class="back-btn" onclick="switchPage('eu-page')">← Back to EU Pathway</button>
         </div>
 
         <div class="controls">
@@ -56,7 +163,7 @@
                     <tr>
                         <th>University</th>
                         <th>Location (City, Country)</th>
-                        <th>Programme & Field</th>
+                        <th>Programme &amp; Field</th>
                         <th>Tuition Fee (/yr)</th>
                         <th>Avg Cost of Living (/mo)</th>
                         <th>University Dorm (/mo)</th>
@@ -70,8 +177,8 @@
 
     <div id="med-page" class="page">
         <div class="page-header">
-            <h1>Medical & Biology Programmes</h1>
-            <button class="back-btn" onclick="switchPage('home-page')">← Back to Home</button>
+            <h1>Medical &amp; Biology Programmes</h1>
+            <button class="back-btn" onclick="switchPage('eu-page')">← Back to EU Pathway</button>
         </div>
 
         <div class="controls">
@@ -91,7 +198,7 @@
                     <tr>
                         <th>University</th>
                         <th>Location (City, Country)</th>
-                        <th>Programme & Field</th>
+                        <th>Programme &amp; Field</th>
                         <th>Tuition Fee (/yr)</th>
                         <th>Avg Cost of Living (/mo)</th>
                         <th>University Dorm (/mo)</th>
@@ -107,6 +214,184 @@
 
 <script>
     // --- DATASETS ---
+
+    // Canada, health-related graduate programmes.
+    // Every row was checked against the institution's official page or fee schedule on 14 July 2026.
+    // All tuition figures below are the INTERNATIONAL student rate.
+    // "Verified": true  = the tuition figure was read off an official university page or fee schedule.
+    // "Verified": false = the university does not publish it openly; the figure is an estimate to confirm directly.
+    const canadaHealthData = [
+        {
+            "University": "Northeastern University,\nToronto Campus",
+            "URL": "https://toronto.northeastern.edu/academic_program/regulatory-affairs/",
+            "Category": "Regulatory Affairs",
+            "Programme": "MS in Regulatory Affairs",
+            "ProgrammeNote": "Concentrations in Biopharmaceutical RA, Clinical Research RA, Medical Device RA and Quality Assurance",
+            "Credential": "Master of Science (MS)",
+            "CredentialType": "Master's Degree",
+            "Duration": "15 months full-time,\nup to 7 years part-time",
+            "Intakes": "Fall 2026 (Sep 2)\nSpring 2027 (Jan 7)\nRolling admissions",
+            "Tuition": "About CAD 47,000 for the whole programme\n(international, 2025/26 estimate)",
+            "Deadline": "Fall 2026: June 1\nSpring 2027: September 4",
+            "Requirements": "• Bachelor's degree in any discipline\n• Statement of purpose of 500 to 1,000 words\n• Professional résumé\n• 2 letters of recommendation\n• Unofficial undergraduate transcripts\n• No GRE required",
+            "English": "IELTS 6.5 | TOEFL iBT 79 | PTE 53 | Duolingo 105",
+            "Highlight": "The only true master's degree in Regulatory Affairs offered anywhere in Canada. It has rolling admissions, two intakes a year and no GRE requirement.",
+            "Verified": true
+        },
+        {
+            "University": "Seneca Polytechnic,\nSeneca@York",
+            "URL": "https://www.senecapolytechnic.ca/programs/fulltime/RAQ.html",
+            "Category": "Regulatory Affairs",
+            "Programme": "Pharmaceutical Regulatory Affairs and Quality Operations (RAQ)",
+            "ProgrammeNote": "Optional work term available",
+            "Credential": "Ontario College Graduate Certificate",
+            "CredentialType": "Graduate Certificate",
+            "Duration": "1 year\n(2 semesters, plus an optional work term)",
+            "Intakes": "September 2026\nJanuary 2027\nMay 2027",
+            "Tuition": "About CAD 9,990.02 per semester,\nroughly CAD 19,980 for two semesters\n(Subject to change by the university, so please confirm before applying)",
+            "Deadline": "Rolling and continuous, so apply early.\nThere is no hard deadline, but seats fill quickly.",
+            "Requirements": "• Degree or diploma in a life science, pharmacy, chemistry, biology or a related health or science field\n• Transcripts from every post-secondary institution attended\n• English proficiency for non-native speakers",
+            "English": "IELTS 6.5 | TOEFL iBT 80 | Duolingo 110",
+            "Highlight": "This is a one year postgraduate diploma rather than a master's degree. It is a practical entry route into regulatory and quality operations roles.",
+            "Verified": false
+        },
+        {
+            "University": "Western University,\nSchulich School of Medicine and Dentistry",
+            "URL": "https://www.schulich.uwo.ca/find-your-program/graduate-studies/drug-safety-pharmacovigilance.html",
+            "Category": "Pharmacovigilance / Drug Safety",
+            "Programme": "MSc Drug Safety and Pharmacovigilance",
+            "ProgrammeNote": "Course based, with a major research project and a practicum at London Health Sciences Centre",
+            "Credential": "Master of Science (MSc)",
+            "CredentialType": "Master's Degree",
+            "Duration": "1 year\n(3 terms, full-time only)",
+            "Intakes": "September 2026\n(Fall intake only)",
+            "Tuition": "CAD 14,694.42 per term\n(full-time international, Fall 2026 fee schedule)\nTuition is CAD 13,240.00 and the balance is ancillary fees.\nThe programme runs for 3 terms.",
+            "Deadline": "International: April 30\nDomestic: June 1",
+            "Requirements": "• 4 year undergraduate degree in a health-related field, or a registered health practitioner with 2 or more years of healthcare experience\n• Minimum B+ average of 78% across the last 10 full courses\n• An undergraduate statistics course passed with at least 75%\n• Proof of registration or licensure if applying as a practitioner\n• An interview may be required\n• Programme contact: okrougly@uwo.ca",
+            "English": "IELTS 7.0 | TOEFL iBT 86 | CAEL 60",
+            "Highlight": "Canada's only dedicated MSc in Drug Safety and Pharmacovigilance. Note carefully that the fee is charged per term, not per year, so budget for all 3 terms. The April 30 international deadline for September 2026 has already passed, so contact the programme about the next cycle.",
+            "Verified": true
+        },
+        {
+            "University": "University of British Columbia (UBC),\nFaculty of Pharmaceutical Sciences",
+            "URL": "https://www.grad.ubc.ca/prospective-students/graduate-degree-programs/master-of-science-pharmaceutical-sciences",
+            "Category": "Pharmaceutical Sciences",
+            "Programme": "MSc in Pharmaceutical Sciences",
+            "ProgrammeNote": "Research intensive and thesis based",
+            "Credential": "Master of Science (MSc)",
+            "CredentialType": "Master's Degree",
+            "Duration": "About 2.3 years on average\n(ranging from 1.7 to 3.3 years)",
+            "Intakes": "September 2027",
+            "Tuition": "CAD 10,081.65 per year\n(international rate, 2026/27)",
+            "Deadline": "January 15, 2027 for September 2027 entry.\nThis is a firm deadline and incomplete applications are not considered.",
+            "Requirements": "• Bachelor's degree in pharmaceutical sciences, medicine, biotechnology, chemistry, biology, biochemistry, pharmacology, biomedical or chemical engineering, economics or epidemiology\n• Minimum B+ overall average, which is 76% at UBC\n• 3 references\n• Statement of interest\n• A supervisor commitment is not required before you apply, though contacting faculty is strongly encouraged",
+            "English": "IELTS 7.0, minimum 6.5 per band | TOEFL iBT 100, minimum 22 per section",
+            "Highlight": "The best value on this list. Tuition is low, and international students receive a minimum stipend of about CAD 36,200 a year, which includes a CAD 3,200 International Tuition Award and more than covers the fees.",
+            "Verified": true
+        },
+        {
+            "University": "University of Toronto,\nLeslie Dan Faculty of Pharmacy",
+            "URL": "https://www.pharmacy.utoronto.ca/programs/graduate-department-pharmaceutical-sciences",
+            "Category": "Pharmaceutical Sciences",
+            "Programme": "MSc in Pharmaceutical Sciences",
+            "ProgrammeNote": "Research intensive and thesis based",
+            "Credential": "Master of Science (MSc)",
+            "CredentialType": "Master's Degree",
+            "Duration": "2 years\n(full-time or part-time)",
+            "Intakes": "Fall 2027\n(applications open in late September 2026)",
+            "Tuition": "Ranges up to CAD 36,700.39 per year\n(international)\n(Subject to change by the university, so please confirm before applying)",
+            "Deadline": "Fall 2027: December 14, 2026\n(applications open in late September 2026)",
+            "Requirements": "• 4 year BSc or BA in natural or life sciences, physical sciences, engineering, social sciences or a health profession\n• Minimum B average of 75% across the last 2 years of full-time study\n• A supervisor commitment is required before your application is reviewed\n• 3 references, a statement of purpose and a CV\n• GRE required for non-Canadian and non-US degree holders, at the 50th percentile or above",
+            "English": "IELTS 7.0 | TOEFL iBT 100",
+            "Highlight": "⚠️ Only 0 to 2 funded international places are expected, which makes this the most competitive option here. The research is top ranked, but treat it as a long shot.",
+            "Verified": false
+        },
+        {
+            "University": "University of Alberta,\nFaculty of Pharmacy and Pharmaceutical Sciences",
+            "URL": "https://www.ualberta.ca/en/pharmacy/programs/graduate/index.html",
+            "Category": "Pharmaceutical Sciences",
+            "Programme": "MSc in Pharmacy and Pharmaceutical Sciences",
+            "ProgrammeNote": "Thesis based and course based options, in pharmaceutical science or pharmacy practice",
+            "Credential": "Master of Science (MSc)",
+            "CredentialType": "Master's Degree",
+            "Duration": "2 years",
+            "Intakes": "September 2026\nJanuary 2027",
+            "Tuition": "Estimated at CAD 10,519 to CAD 24,780 per year\n(published estimates vary widely)\n(Subject to change by the university, so please confirm before applying)",
+            "Deadline": "For September 2027, apply around February or March 2027.\nThe department does not publish a fixed date, so please contact them for the exact deadline.",
+            "Requirements": "• 4 year BSc in pharmacy, pharmaceutical sciences, chemistry, biochemistry or a related discipline\n• Minimum GPA of 3.0 out of 4.0\n• A supervisor or research area identified, for the thesis based route\n• Application fee of CAD 100",
+            "English": "IELTS 6.5 | TOEFL iBT 88 to 90 | PTE 61 | Duolingo 120",
+            "Highlight": "A flexible, broad pharmaceutical sciences option with both thesis and course based routes. Published fee estimates vary a lot, so ask the university for a written quote before you commit.",
+            "Verified": false
+        },
+        {
+            "University": "Dalhousie University,\nCollege of Pharmacy",
+            "URL": "https://www.dal.ca/study/program-sites/pharmaceutical-science/admissions.html",
+            "Category": "Pharmaceutical Sciences",
+            "Programme": "MSc in Pharmaceutical Science",
+            "ProgrammeNote": "Research intensive and thesis based, full-time or part-time",
+            "Credential": "Master of Science (MSc)",
+            "CredentialType": "Master's Degree",
+            "Duration": "2 years\n(full-time)",
+            "Intakes": "January 2027\nSeptember 2027",
+            "Tuition": "Estimated at CAD 13,921 to CAD 36,362 per year\n(published estimates vary widely)\n(Subject to change by the university, so please confirm before applying)",
+            "Deadline": "September 2027: April 1, 2027 for international applicants\nJanuary 2027: August 31, 2026 for international applicants\n(these are the general Faculty of Graduate Studies dates, so confirm with the programme)",
+            "Requirements": "• BSc Honours or a health profession degree, including Pharmacy\n• Minimum GPA of 3.3 out of 4.0, which the Pharmaceutical Science department sets above the 3.0 university minimum\n• A supervisor identified, strongly recommended\n• 3 references\n• Statement of interest\n• Application fee of CAD 115",
+            "English": "IELTS 7.0 | TOEFL iBT 92 | PTE 65, nothing below 54 | CAEL 70",
+            "Highlight": "Watch the higher 3.3 GPA bar set by the department. Published fee estimates vary a lot, so ask Dalhousie for a written quote before you commit.",
+            "Verified": false
+        },
+        {
+            "University": "University of Saskatchewan,\nCollege of Pharmacy and Nutrition",
+            "URL": "https://grad.usask.ca/programs/pharmacy.php",
+            "Category": "Pharmaceutical Sciences",
+            "Programme": "MSc in Pharmacy",
+            "ProgrammeNote": "Pharmacokinetics, medicinal chemistry, pharmacoepidemiology, drug delivery and clinical pharmacy",
+            "Credential": "Master of Science (MSc)",
+            "CredentialType": "Master's Degree",
+            "Duration": "2 years\n(thesis based)",
+            "Intakes": "September or January\n(applications accepted year round)",
+            "Tuition": "CAD 4,279.00 per term,\nwhich is CAD 12,837.00 per year (international).\nThesis students are assessed 3 times a year.\nThe domestic rate is CAD 5,706 a year.",
+            "Deadline": "No set deadline. Applications are accepted year round.",
+            "Requirements": "• 4 year honours degree from a recognised institution\n• Cumulative weighted average of at least 70% across the last 2 years of study\n• A faculty supervisor's approval is required before you apply, and admission is not possible without one in place\n• For the clinical pharmacy area you must be eligible for pharmacist licensure in Saskatchewan",
+            "English": "IELTS 6.5 | TOEFL iBT 86 | PTE 63 | Duolingo 120",
+            "Highlight": "The most flexible entry on this list, with no application deadline and two intakes a year. Nothing moves until a supervisor agrees to take you, though.",
+            "Verified": true
+        },
+        {
+            "University": "University of Manitoba,\nCollege of Pharmacy",
+            "URL": "https://umanitoba.ca/graduate-studies/admissions/programs-of-study/pharmaceutical-sciences-msc",
+            "Category": "Pharmaceutical Sciences",
+            "Programme": "MSc in Pharmaceutical Sciences",
+            "ProgrammeNote": "Research based, covering pharmacology, pharmacoepidemiology, drug utilisation and medication safety",
+            "Credential": "Master of Science (MSc)",
+            "CredentialType": "Master's Degree",
+            "Duration": "2 years or more",
+            "Intakes": "September 2026 (Fall)\nJanuary 2027 (Winter)\nMay 2027 (Summer)",
+            "Tuition": "About CAD 7,186.36 per term,\nroughly CAD 14,372.72 across the first two terms\n(Based on the university's general international master's rate for 2026/27)\n(Subject to change by the university, so please confirm before applying)",
+            "Deadline": "International applicants:\nFall entry: December 1\nWinter entry: March 1\nSummer entry: August 1",
+            "Requirements": "• 4 year undergraduate degree in biochemistry, biology, cell biology, chemistry, computer science, pharmacology, pharmaceutical sciences, pharmacy or statistics\n• Cumulative GPA of at least 3.0 out of 4.5, based on the last 60 credit hours\n• You must negotiate a traineeship or supervisor placement before applying",
+            "English": "IELTS 6.5 | TOEFL iBT 86 | Duolingo 120",
+            "Highlight": "Three intakes a year. Note that the international deadlines fall much earlier than the domestic ones, with Fall entry closing the previous December.",
+            "Verified": false
+        },
+        {
+            "University": "University of Manitoba,\nDept. of Pharmacology and Therapeutics",
+            "URL": "https://umanitoba.ca/graduate-studies/admissions/programs-of-study/pharmacology-and-therapeutics-msc",
+            "Category": "Pharmaceutical Sciences",
+            "Programme": "MSc in Pharmacology and Therapeutics",
+            "ProgrammeNote": "Coursework plus a thesis, with an emphasis on research skills and oral communication",
+            "Credential": "Master of Science (MSc)",
+            "CredentialType": "Master's Degree",
+            "Duration": "2 to 3 years",
+            "Intakes": "September 2026 (Fall)\nWinter and Summer entry also available",
+            "Tuition": "About CAD 7,186.36 per term,\nroughly CAD 14,372.72 across the first two terms\n(Based on the university's general international master's rate for 2026/27)\n(Subject to change by the university, so please confirm before applying)",
+            "Deadline": "International applicants:\nFall entry: February 1\nDomestic: June 1",
+            "Requirements": "• 4 year bachelor's degree in science, pharmacy, pharmacology, medicine, nursing or veterinary medicine\n• Completed courses in two of the following: chemistry, physics, biology\n• Minimum B average of 3.0 across the last 60 credit hours\n• A supervisor match is required\n• Statement of intent, 2 letters of recommendation and an application fee",
+            "English": "IELTS 6.5 | TOEFL iBT 86 | Duolingo 120",
+            "Highlight": "A strong pharmacology research route with three entry points a year. Confirm the exact fee with U of M before you rely on it.",
+            "Verified": false
+        }
+    ];
 
     const itData = [
         { "University": "POLITEHNICA Bucharest (UPB)", "Country": "Romania 🇷🇴", "City": "Bucharest", "Field": "IT / Computer Engineering", "Programme": "Information Engineering", "Tuition": "€2,430", "AvgCostLiving": "€400 – €550", "DormFee": "€100 – €200", "StudioFee": "€350 – €500" },
@@ -128,24 +413,24 @@
 
     const medData = [
         { "University": "University of Bucharest\n(Faculty of Biology)", "Country": "Romania", "City": "Bucharest", "Field": "Post-Bachelor's MSc", "Programme": "MSc Applied Biochemistry & Molecular Biology (ABMB)", "Tuition": "€3,050", "AvgCostLiving": "€400 – €700", "DormFee": "€50 – €100", "StudioFee": "€350 – €450" },
-        { "University": "Carol Davila University of Medicine & Pharmacy", "Country": "Romania", "City": "Bucharest", "Field": "Integrated Master's", "Programme": "General Medicine (MD) — 6-yr Integrated", "Tuition": "€10,000", "AvgCostLiving": "€400 – €700", "DormFee": "€50 – €100", "StudioFee": "€350 – €450" },
-        { "University": "Carol Davila University of Medicine & Pharmacy", "Country": "Romania", "City": "Bucharest", "Field": "Integrated Master's", "Programme": "Dentistry (DDS) — 6-yr Integrated", "Tuition": "€10,000", "AvgCostLiving": "€400 – €700", "DormFee": "€50 – €100", "StudioFee": "€350 – €450" },
-        { "University": "Carol Davila University of Medicine & Pharmacy", "Country": "Romania", "City": "Bucharest", "Field": "Integrated Master's", "Programme": "Pharmacy — 5-yr Integrated\n⚠️ Taught in FRENCH (not English)", "Tuition": "€8,500", "AvgCostLiving": "€400 – €700", "DormFee": "€50 – €100", "StudioFee": "€350 – €450" },
-        { "University": "Grigore T. Popa University of Medicine & Pharmacy", "Country": "Romania", "City": "Iași", "Field": "Integrated Master's", "Programme": "General Medicine (MD) — 6-yr Integrated", "Tuition": "€7,500", "AvgCostLiving": "€350 – €550", "DormFee": "€50 – €100", "StudioFee": "€300 – €400" },
-        { "University": "Grigore T. Popa University of Medicine & Pharmacy", "Country": "Romania", "City": "Iași", "Field": "Integrated Master's", "Programme": "Pharmacy — 5-yr Integrated (English)", "Tuition": "€11,000", "AvgCostLiving": "€350 – €550", "DormFee": "€50 – €100", "StudioFee": "€300 – €400" },
-        { "University": "Iuliu Hațieganu University of Medicine & Pharmacy", "Country": "Romania", "City": "Cluj-Napoca", "Field": "Integrated Master's", "Programme": "General Medicine (MD) — 6-yr Integrated", "Tuition": "~€8,000", "AvgCostLiving": "€400 – €650", "DormFee": "€60 – €100", "StudioFee": "€350 – €480" },
-        { "University": "Iuliu Hațieganu University of Medicine & Pharmacy", "Country": "Romania", "City": "Cluj-Napoca", "Field": "Integrated Master's", "Programme": "Dentistry — 6-yr Integrated (English)", "Tuition": "~€8,000", "AvgCostLiving": "€400 – €650", "DormFee": "€60 – €100", "StudioFee": "€350 – €480" },
-        { "University": "Iuliu Hațieganu University of Medicine & Pharmacy", "Country": "Romania", "City": "Cluj-Napoca", "Field": "Integrated Master's", "Programme": "Pharmacy — 5-yr Integrated (English)", "Tuition": "~€8,000", "AvgCostLiving": "€400 – €650", "DormFee": "€60 – €100", "StudioFee": "€350 – €480" },
-        { "University": "Masaryk University\n(Faculty of Pharmacy)", "Country": "Czech Republic\n(Schengen)", "City": "Brno", "Field": "Integrated Master's", "Programme": "MPharm Pharmacy — 5-yr Integrated (English)", "Tuition": "€7,500", "AvgCostLiving": "€500 – €750", "DormFee": "€200 – €320", "StudioFee": "€420 – €550" },
-        { "University": "Masaryk University\n(Faculty of Medicine)", "Country": "Czech Republic\n(Schengen)", "City": "Brno", "Field": "Integrated Master's", "Programme": "General Medicine (MD) — 6-yr Integrated (English)", "Tuition": "~€12,000", "AvgCostLiving": "€500 – €750", "DormFee": "€200 – €320", "StudioFee": "€420 – €550" },
-        { "University": "Comenius University\n— Jessenius Faculty of Medicine", "Country": "Slovakia\n(Schengen)", "City": "Martin", "Field": "Integrated Master's", "Programme": "General Medicine (MD) — 6-yr Integrated (English)", "Tuition": "~€12,000–14,000", "AvgCostLiving": "€400 – €600", "DormFee": "€150 – €250", "StudioFee": "€320 – €450" },
-        { "University": "Semmelweis University", "Country": "Hungary\n(Schengen)", "City": "Budapest", "Field": "Integrated Master's", "Programme": "General Medicine (MD) — 6-yr Integrated (English)", "Tuition": "~USD 19,900\n(≈ €18,500/yr)", "AvgCostLiving": "€700 – €1,000", "DormFee": "€200 – €350", "StudioFee": "€450 – €650" },
-        { "University": "Semmelweis University", "Country": "Hungary\n(Schengen)", "City": "Budapest", "Field": "Integrated Master's", "Programme": "Pharmacy — 5-yr Integrated (English)", "Tuition": "~USD 19,900\n(≈ €18,500/yr)", "AvgCostLiving": "€700 – €1,000", "DormFee": "€200 – €350", "StudioFee": "€450 – €650" },
-        { "University": "Medical University of Gdańsk", "Country": "Poland\n(Schengen)", "City": "Gdańsk", "Field": "Integrated Master's", "Programme": "General Medicine (MD) — 6-yr English Division", "Tuition": "€12,500", "AvgCostLiving": "€500 – €700", "DormFee": "€150 – €250", "StudioFee": "€400 – €550" },
-        { "University": "Medical University of Gdańsk", "Country": "Poland\n(Schengen)", "City": "Gdańsk", "Field": "Integrated Master's", "Programme": "Dental Medicine — 5-yr English Division", "Tuition": "€14,000", "AvgCostLiving": "€500 – €700", "DormFee": "€150 – €250", "StudioFee": "€400 – €550" },
-        { "University": "LMU Munich\n(Ludwig Maximilian University)", "Country": "Germany\n(Schengen)", "City": "Munich", "Field": "Post-Bachelor's MSc", "Programme": "MSc Molecular & Cellular Biology — 2-yr", "Tuition": "~€0 tuition\n(Semester contrib: ~€373)", "AvgCostLiving": "€1,300 – €2,000", "DormFee": "€280 – €400", "StudioFee": "€1,000 – €1,500" },
-        { "University": "LMU Munich\n(Ludwig Maximilian University)", "Country": "Germany\n(Schengen)", "City": "Munich", "Field": "Post-Bachelor's MSc", "Programme": "MSc Neurosciences — 2-yr", "Tuition": "~€0 tuition\n(Semester contrib: ~€373)", "AvgCostLiving": "€1,300 – €2,000", "DormFee": "€280 – €400", "StudioFee": "€1,000 – €1,500" },
-        { "University": "Sorbonne University & Paris public universities", "Country": "France\n(Schengen)", "City": "Paris", "Field": "Post-Bachelor's MSc", "Programme": "MSc Biology / Life Sciences — 2-yr\n(French-taught — no English MSc)", "Tuition": "€3,770", "AvgCostLiving": "€1,200 – €2,000", "DormFee": "€400 – €600", "StudioFee": "€900 – €1,400" }
+        { "University": "Carol Davila University of Medicine & Pharmacy", "Country": "Romania", "City": "Bucharest", "Field": "Integrated Master's", "Programme": "General Medicine (MD), 6-yr Integrated", "Tuition": "€10,000", "AvgCostLiving": "€400 – €700", "DormFee": "€50 – €100", "StudioFee": "€350 – €450" },
+        { "University": "Carol Davila University of Medicine & Pharmacy", "Country": "Romania", "City": "Bucharest", "Field": "Integrated Master's", "Programme": "Dentistry (DDS), 6-yr Integrated", "Tuition": "€10,000", "AvgCostLiving": "€400 – €700", "DormFee": "€50 – €100", "StudioFee": "€350 – €450" },
+        { "University": "Carol Davila University of Medicine & Pharmacy", "Country": "Romania", "City": "Bucharest", "Field": "Integrated Master's", "Programme": "Pharmacy, 5-yr Integrated\n⚠️ Taught in FRENCH (not English)", "Tuition": "€8,500", "AvgCostLiving": "€400 – €700", "DormFee": "€50 – €100", "StudioFee": "€350 – €450" },
+        { "University": "Grigore T. Popa University of Medicine & Pharmacy", "Country": "Romania", "City": "Iași", "Field": "Integrated Master's", "Programme": "General Medicine (MD), 6-yr Integrated", "Tuition": "€7,500", "AvgCostLiving": "€350 – €550", "DormFee": "€50 – €100", "StudioFee": "€300 – €400" },
+        { "University": "Grigore T. Popa University of Medicine & Pharmacy", "Country": "Romania", "City": "Iași", "Field": "Integrated Master's", "Programme": "Pharmacy, 5-yr Integrated (English)", "Tuition": "€11,000", "AvgCostLiving": "€350 – €550", "DormFee": "€50 – €100", "StudioFee": "€300 – €400" },
+        { "University": "Iuliu Hațieganu University of Medicine & Pharmacy", "Country": "Romania", "City": "Cluj-Napoca", "Field": "Integrated Master's", "Programme": "General Medicine (MD), 6-yr Integrated", "Tuition": "~€8,000", "AvgCostLiving": "€400 – €650", "DormFee": "€60 – €100", "StudioFee": "€350 – €480" },
+        { "University": "Iuliu Hațieganu University of Medicine & Pharmacy", "Country": "Romania", "City": "Cluj-Napoca", "Field": "Integrated Master's", "Programme": "Dentistry, 6-yr Integrated (English)", "Tuition": "~€8,000", "AvgCostLiving": "€400 – €650", "DormFee": "€60 – €100", "StudioFee": "€350 – €480" },
+        { "University": "Iuliu Hațieganu University of Medicine & Pharmacy", "Country": "Romania", "City": "Cluj-Napoca", "Field": "Integrated Master's", "Programme": "Pharmacy, 5-yr Integrated (English)", "Tuition": "~€8,000", "AvgCostLiving": "€400 – €650", "DormFee": "€60 – €100", "StudioFee": "€350 – €480" },
+        { "University": "Masaryk University\n(Faculty of Pharmacy)", "Country": "Czech Republic\n(Schengen)", "City": "Brno", "Field": "Integrated Master's", "Programme": "MPharm Pharmacy, 5-yr Integrated (English)", "Tuition": "€7,500", "AvgCostLiving": "€500 – €750", "DormFee": "€200 – €320", "StudioFee": "€420 – €550" },
+        { "University": "Masaryk University\n(Faculty of Medicine)", "Country": "Czech Republic\n(Schengen)", "City": "Brno", "Field": "Integrated Master's", "Programme": "General Medicine (MD), 6-yr Integrated (English)", "Tuition": "~€12,000", "AvgCostLiving": "€500 – €750", "DormFee": "€200 – €320", "StudioFee": "€420 – €550" },
+        { "University": "Comenius University\n(Jessenius Faculty of Medicine)", "Country": "Slovakia\n(Schengen)", "City": "Martin", "Field": "Integrated Master's", "Programme": "General Medicine (MD), 6-yr Integrated (English)", "Tuition": "~€12,000–14,000", "AvgCostLiving": "€400 – €600", "DormFee": "€150 – €250", "StudioFee": "€320 – €450" },
+        { "University": "Semmelweis University", "Country": "Hungary\n(Schengen)", "City": "Budapest", "Field": "Integrated Master's", "Programme": "General Medicine (MD), 6-yr Integrated (English)", "Tuition": "~USD 19,900\n(≈ €18,500/yr)", "AvgCostLiving": "€700 – €1,000", "DormFee": "€200 – €350", "StudioFee": "€450 – €650" },
+        { "University": "Semmelweis University", "Country": "Hungary\n(Schengen)", "City": "Budapest", "Field": "Integrated Master's", "Programme": "Pharmacy, 5-yr Integrated (English)", "Tuition": "~USD 19,900\n(≈ €18,500/yr)", "AvgCostLiving": "€700 – €1,000", "DormFee": "€200 – €350", "StudioFee": "€450 – €650" },
+        { "University": "Medical University of Gdańsk", "Country": "Poland\n(Schengen)", "City": "Gdańsk", "Field": "Integrated Master's", "Programme": "General Medicine (MD), 6-yr English Division", "Tuition": "€12,500", "AvgCostLiving": "€500 – €700", "DormFee": "€150 – €250", "StudioFee": "€400 – €550" },
+        { "University": "Medical University of Gdańsk", "Country": "Poland\n(Schengen)", "City": "Gdańsk", "Field": "Integrated Master's", "Programme": "Dental Medicine, 5-yr English Division", "Tuition": "€14,000", "AvgCostLiving": "€500 – €700", "DormFee": "€150 – €250", "StudioFee": "€400 – €550" },
+        { "University": "LMU Munich\n(Ludwig Maximilian University)", "Country": "Germany\n(Schengen)", "City": "Munich", "Field": "Post-Bachelor's MSc", "Programme": "MSc Molecular & Cellular Biology, 2-yr", "Tuition": "~€0 tuition\n(Semester contrib: ~€373)", "AvgCostLiving": "€1,300 – €2,000", "DormFee": "€280 – €400", "StudioFee": "€1,000 – €1,500" },
+        { "University": "LMU Munich\n(Ludwig Maximilian University)", "Country": "Germany\n(Schengen)", "City": "Munich", "Field": "Post-Bachelor's MSc", "Programme": "MSc Neurosciences, 2-yr", "Tuition": "~€0 tuition\n(Semester contrib: ~€373)", "AvgCostLiving": "€1,300 – €2,000", "DormFee": "€280 – €400", "StudioFee": "€1,000 – €1,500" },
+        { "University": "Sorbonne University & Paris public universities", "Country": "France\n(Schengen)", "City": "Paris", "Field": "Post-Bachelor's MSc", "Programme": "MSc Biology / Life Sciences, 2-yr\n(French-taught, with no English MSc)", "Tuition": "€3,770", "AvgCostLiving": "€1,200 – €2,000", "DormFee": "€400 – €600", "StudioFee": "€900 – €1,400" }
     ];
 
     // --- LOGIC ---
@@ -174,7 +459,7 @@
             const option = document.createElement('option');
             option.value = country;
             // Clean up display name for the dropdown
-            option.textContent = country.replace(/\n/g, ' '); 
+            option.textContent = country.replace(/\n/g, ' ');
             countryFilter.appendChild(option);
         });
 
@@ -189,7 +474,7 @@
     // Render Table logic retaining specific text formatting requested
     function renderTable(data, tableBodyId) {
         const tableBody = document.getElementById(tableBodyId);
-        tableBody.innerHTML = ''; 
+        tableBody.innerHTML = '';
 
         if (data.length === 0) {
             tableBody.innerHTML = `<tr><td colspan="7" class="empty-state">No programmes match your current filters.</td></tr>`;
@@ -232,6 +517,150 @@
         fieldSelect.addEventListener('change', applyFilters);
     }
 
+    // --- CANADA / HEALTH TABLE ---
+
+    // Each programme renders as a summary row plus a hidden detail row holding the
+    // admission requirements and English scores, so the table stays readable.
+    function renderCanadaTable(data) {
+        const tableBody = document.getElementById('ca-table-body');
+        const count = document.getElementById('ca-count');
+        tableBody.innerHTML = '';
+
+        count.textContent = `Showing ${data.length} of ${canadaHealthData.length} programmes`;
+
+        if (data.length === 0) {
+            tableBody.innerHTML = `<tr><td colspan="8" class="empty-state">No programmes match your current filters.</td></tr>`;
+            return;
+        }
+
+        data.forEach((item, index) => {
+            const detailId = `ca-detail-${index}`;
+            const isMasters = item.CredentialType === "Master's Degree";
+
+            // data-label feeds the stacked card layout on phones, where the
+            // table header is hidden and each cell prints its own label.
+            const row = document.createElement('tr');
+            row.className = 'summary-row';
+            row.innerHTML = `
+                <td data-label="University">
+                    <a class="uni-link" href="${item.URL}" target="_blank" rel="noopener">
+                        ${formatText(item.University)}
+                    </a>
+                    <span class="link-hint">Official site ↗</span>
+                </td>
+                <td data-label="Programme &amp; Field">
+                    <strong>${formatText(item.Programme)}</strong>
+                    <br><small><i>${formatText(item.ProgrammeNote)}</i></small>
+                    <br><span class="tag tag-${slug(item.Category)}">${item.Category}</span>
+                </td>
+                <td data-label="Credential">
+                    <span class="badge ${isMasters ? 'badge-ok' : 'badge-warn'}">
+                        ${isMasters ? '✅' : '⚠️'} ${item.Credential}
+                    </span>
+                </td>
+                <td data-label="Duration">${formatText(item.Duration)}</td>
+                <td data-label="Intakes (2026/27)">${formatText(item.Intakes)}</td>
+                <td data-label="International Tuition (CAD)">${formatText(item.Tuition)}</td>
+                <td data-label="Application Deadline (International)">${formatText(item.Deadline)}</td>
+                <td class="details-cell">
+                    <button class="details-btn" aria-expanded="false" aria-controls="${detailId}">View details</button>
+                </td>
+            `;
+
+            const detailRow = document.createElement('tr');
+            detailRow.className = 'detail-row';
+            detailRow.id = detailId;
+            detailRow.innerHTML = `
+                <td colspan="8">
+                    <div class="detail-grid">
+                        <div>
+                            <h4>Admission Requirements</h4>
+                            <p>${formatText(item.Requirements)}</p>
+                        </div>
+                        <div>
+                            <h4>English Proficiency</h4>
+                            <p>${formatText(item.English)}</p>
+                            <h4>Good to Know</h4>
+                            <p>${formatText(item.Highlight)}</p>
+                            ${item.Verified ? '' : '<p class="verify-note">Tuition and dates are subject to change by the university. Please confirm the current figures with them before you apply.</p>'}
+                            <a class="visit-btn" href="${item.URL}" target="_blank" rel="noopener">Visit official programme page ↗</a>
+                        </div>
+                    </div>
+                </td>
+            `;
+
+            const toggle = row.querySelector('.details-btn');
+            const toggleDetails = () => {
+                const open = detailRow.classList.toggle('open');
+                toggle.textContent = open ? 'Hide details' : 'View details';
+                toggle.setAttribute('aria-expanded', open);
+            };
+
+            toggle.addEventListener('click', toggleDetails);
+
+            // Anywhere on the row opens the details too, so nobody has to scroll
+            // sideways to reach the button. Clicking the university link still
+            // just follows the link.
+            row.addEventListener('click', (event) => {
+                if (event.target.closest('a') || event.target.closest('.details-btn')) return;
+                toggleDetails();
+            });
+
+            tableBody.appendChild(row);
+            tableBody.appendChild(detailRow);
+        });
+    }
+
+    const slug = (text) => text.toLowerCase().replace(/[^a-z]+/g, '-').replace(/^-|-$/g, '');
+
+    function initializeCanadaFilters() {
+        const categoryFilter = document.getElementById('ca-category-filter');
+        const credentialFilter = document.getElementById('ca-credential-filter');
+
+        [...new Set(canadaHealthData.map(item => item.Category))].sort().forEach(category => {
+            const option = document.createElement('option');
+            option.value = category;
+            option.textContent = category;
+            categoryFilter.appendChild(option);
+        });
+
+        [...new Set(canadaHealthData.map(item => item.CredentialType))].sort().forEach(credential => {
+            const option = document.createElement('option');
+            option.value = credential;
+            option.textContent = credential;
+            credentialFilter.appendChild(option);
+        });
+    }
+
+    function applyCanadaFilters() {
+        const term = document.getElementById('ca-search').value.trim().toLowerCase();
+        const category = document.getElementById('ca-category-filter').value;
+        const credential = document.getElementById('ca-credential-filter').value;
+
+        const filtered = canadaHealthData.filter(item => {
+            const matchCategory = category === 'All' || item.Category === category;
+            const matchCredential = credential === 'All' || item.CredentialType === credential;
+            const haystack = `${item.University} ${item.Programme} ${item.ProgrammeNote}`.toLowerCase();
+            const matchTerm = term === '' || haystack.includes(term);
+            return matchCategory && matchCredential && matchTerm;
+        });
+
+        renderCanadaTable(filtered);
+    }
+
+    function resetCanadaFilters() {
+        document.getElementById('ca-search').value = '';
+        document.getElementById('ca-category-filter').value = 'All';
+        document.getElementById('ca-credential-filter').value = 'All';
+        applyCanadaFilters();
+    }
+
+    function setupCanadaFiltering() {
+        document.getElementById('ca-search').addEventListener('input', applyCanadaFilters);
+        document.getElementById('ca-category-filter').addEventListener('change', applyCanadaFilters);
+        document.getElementById('ca-credential-filter').addEventListener('change', applyCanadaFilters);
+    }
+
     // Boot Application
     window.onload = () => {
         // Init IT Dash
@@ -243,6 +672,11 @@
         initializeFilters(medData, 'med-country-filter', 'med-field-filter');
         setupFiltering(medData, 'med-country-filter', 'med-field-filter', 'med-table-body');
         renderTable(medData, 'med-table-body');
+
+        // Init Canada Health Dash
+        initializeCanadaFilters();
+        setupCanadaFiltering();
+        renderCanadaTable(canadaHealthData);
     };
 </script>
 
